@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const blogSlice = createSlice({
     name:"blog",
@@ -22,9 +21,12 @@ export default blogSlice.reducer
 
 export function addblog(data){
     return async function addblogThunk(dispatch){
-        dispatch(setData(data))
         try{
-            const response = await axios.post("https://react20.onrender.com/api/addblog", data)
+            const response = await await API.get("register", data, {
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            })
             if (response.status===201){
                 dispatch(setStatus(STATUSES.SUCCESS))
             }else{

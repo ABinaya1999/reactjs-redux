@@ -45,4 +45,4 @@ const Form = ({type, onSubmit}) => {
   )
 }
 
-export default Form
+export default React.memo(Form)

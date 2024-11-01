@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import STATUSES from "../src/global/status/statuses";
+import API from "../src/http";
 
 const authSlice = createSlice({
     name:'auth',
@@ -30,7 +30,11 @@ export function register(data){
     return async function registerThunk(dispatch){
         dispatch(setStatus(STATUSES.LOADING))
         try{
-            const response = await axios.post("https://react20.onrender.com/api/user/reigster", data)
+            const response = await API.get("register", data, {
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            })
         if (response.status===201){
             dispatch(setStatus(STATUSES.SUCCESS))
         }else{

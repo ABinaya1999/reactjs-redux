@@ -8,9 +8,9 @@ const Register = () => {
   const navigate = useNavigate()
   const {status} = useSelector((state)=>state.auth)
   const dispatch = useDispatch()
-  const onSubmit = (data)=>{
+  const onSubmit = useCallback((data)=>{
     dispatch(register(data))
-  }
+  }, [status])
   useEffect(()=>{
     if (status===STATUSES.SUCCESS){
       navigate("/login")
